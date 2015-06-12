@@ -2,7 +2,6 @@ package net.epoxide.permissions.common;
 
 import net.epoxide.permissions.common.api.PermissionsRegistry;
 import net.epoxide.permissions.common.utility.AbstractPermissionsFileReader;
-import cpw.mods.fml.common.discovery.ASMDataTable;
 
 public class PermissionsManager 
 {
@@ -13,20 +12,47 @@ public class PermissionsManager
 		return INSTANCE;
 	}
 
+	/* Not Needed if my plan works, but it's here for now
 	public void distributePermissionsRegistryToListeners(ASMDataTable asmData)
 	{
-		asmData.getAll("net.epoxide.permissions.common.api.PermissionHandler");
-	}
+		Set<ASMData> data = asmData.getAll("net.epoxide.permissions.common.api.PermissionHandler");
+		for(ASMData dataEntry : data)
+		{
+			try 
+			{
+				Field[] fields = Class.forName(dataEntry.getClassName()).getDeclaredFields();
+				for(Field field : fields)
+				{
+					if(field.isAnnotationPresent(PermissionHandler.class) && field.getType().equals(PermissionsRegistry.class))
+					{
+						field.setAccessible(true);
+						field.set(null, PermissionsRegistry.instance());
+					}
+				}
+			} 
+			catch (SecurityException e) 
+			{
+				e.printStackTrace();
+			} 
+			catch (ClassNotFoundException e) 
+			{
+				e.printStackTrace();
+			} 
+			catch (IllegalArgumentException e) 
+			{
+				e.printStackTrace();
+			}
+			catch (IllegalAccessException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+	}*/
 	
 	public void populateManager(AbstractPermissionsFileReader fileReader) 
 	{
 		fileReader.buildRanksFromFile();
 		fileReader.buildPlayerSpecificPerms();
 		PermissionsRegistry.instance().populate(fileReader);
-	}
-
-	public void populatePermissionsListeners(ASMDataTable asmData) 
-	{
-		
 	}
 }

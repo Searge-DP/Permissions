@@ -5,10 +5,14 @@ import java.util.List;
 import net.epoxide.permissions.common.utility.AbstractPermissionsFileReader;
 import net.minecraft.entity.player.EntityPlayer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.common.collect.ImmutableMap;
 
 public class PermissionsRegistry 
 {
+	private static final Logger PERM_REG_LOG = LogManager.getLogger("Permissions Registry");
 	private static final PermissionsRegistry INSTANCE = new PermissionsRegistry();
 	private static final String NBT_RANK_TITLE = "Rank-Title";
 	private static final String NBT_PERM_LVL_KEY = "Permissions-Level";	
@@ -24,6 +28,12 @@ public class PermissionsRegistry
 	 **/
 	public boolean isPlayerPermitted(EntityPlayer entityPlayer, String permission)
 	{
+		if(!this.isAvailable())
+		{
+			PermissionsRegistry.PERM_REG_LOG.warn("The Permissions Registry has not been populated and is currently unavailable. Disallowing player's Usage.");
+			return false;
+		}
+		
 		if(rankPermissions.get(getRankForPlayer(entityPlayer)).contains(permission) || playerSpecificPermissions.get(entityPlayer.getDisplayName()).contains(permission))
 			return true;
 		return false;

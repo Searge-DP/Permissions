@@ -19,7 +19,7 @@ public class Rank
 		this.permissionsLevel = permLevel;
 		RANKS.add(this);
 		
-		if(DEFAULT == null || DEFAULT.permissionsLevel > this.permissionsLevel)
+		if(DEFAULT == null || (DEFAULT.permissionsLevel > this.permissionsLevel && this.permissionsLevel >= 0))
 			DEFAULT = this;
 	}
 	

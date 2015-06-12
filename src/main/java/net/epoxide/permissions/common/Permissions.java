@@ -18,7 +18,6 @@ public class Permissions
 	@EventHandler
 	public void onPreInitialization(FMLPreInitializationEvent event)
 	{
-		PermissionsManager.instance().populatePermissionsListeners(event.getAsmData());
 		JSONPermissionsFileReader file = new JSONPermissionsFileReader(new File("test"));
 		PermissionsManager.instance().populateManager(file);
 	}
