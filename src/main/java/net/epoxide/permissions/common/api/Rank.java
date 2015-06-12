@@ -7,6 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class Rank 
 {	
+	public static final String NBT_RANK_TITLE = "Rank-Title";
+	public static final String NBT_PERM_LVL_KEY = "Permissions-Level";	
 	private static final List<Rank> RANKS = new ArrayList<Rank>();
 	private static Rank DEFAULT;
 	
@@ -55,6 +57,7 @@ public class Rank
 
 	public static void setDefault(EntityPlayer entityPlayer) 
 	{
-		
+		entityPlayer.getEntityData().setString(Rank.NBT_RANK_TITLE, DEFAULT.rankName);
+		entityPlayer.getEntityData().setInteger(Rank.NBT_PERM_LVL_KEY, DEFAULT.permissionsLevel);
 	}
 }

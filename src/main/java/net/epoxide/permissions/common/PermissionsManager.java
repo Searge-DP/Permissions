@@ -1,6 +1,7 @@
 package net.epoxide.permissions.common;
 
 import net.epoxide.permissions.common.api.PermissionsRegistry;
+import net.epoxide.permissions.common.ref.Constants;
 import net.epoxide.permissions.common.utility.AbstractPermissionsFileReader;
 
 public class PermissionsManager 
@@ -51,6 +52,12 @@ public class PermissionsManager
 	
 	public void populateManager(AbstractPermissionsFileReader fileReader) 
 	{
+		if(fileReader == null)
+		{
+			Constants.LOGGER.error("Invalid Permissions File Format.");
+			return;
+		}
+		
 		fileReader.buildRanksFromFile();
 		fileReader.buildPlayerSpecificPerms();
 		PermissionsRegistry.instance().populate(fileReader);

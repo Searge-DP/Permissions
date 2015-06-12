@@ -14,8 +14,6 @@ public class PermissionsRegistry
 {
 	private static final Logger PERM_REG_LOG = LogManager.getLogger("Permissions Registry");
 	private static final PermissionsRegistry INSTANCE = new PermissionsRegistry();
-	private static final String NBT_RANK_TITLE = "Rank-Title";
-	private static final String NBT_PERM_LVL_KEY = "Permissions-Level";	
 	
 	private boolean isAvailable = false;
 	private ImmutableMap<Rank, List<String>> rankPermissions;
@@ -52,8 +50,8 @@ public class PermissionsRegistry
 		 * If this is not the case, the player is not in this rank.
 		 * If the specified rank does not exist, it will be reset to the default rank (The rank with the lowest permissions level).
 		 **/
-		String rankTitle = entityPlayer.getEntityData().getString(PermissionsRegistry.NBT_RANK_TITLE);
-		int permLevel = entityPlayer.getEntityData().getInteger(PermissionsRegistry.NBT_PERM_LVL_KEY);
+		String rankTitle = entityPlayer.getEntityData().getString(Rank.NBT_RANK_TITLE);
+		int permLevel = entityPlayer.getEntityData().getInteger(Rank.NBT_PERM_LVL_KEY);
 		Rank rank = new Rank(rankTitle, permLevel);
 		if(!Rank.isValidRank(rank))
 		{
