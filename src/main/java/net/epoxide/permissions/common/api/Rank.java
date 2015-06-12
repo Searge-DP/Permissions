@@ -19,7 +19,8 @@ public class Rank
 	{
 		this.rankName = rankName;
 		this.permissionsLevel = permLevel;
-		RANKS.add(this);
+		if(!RANKS.contains(this))
+			RANKS.add(this);
 		
 		if(DEFAULT == null || (DEFAULT.permissionsLevel > this.permissionsLevel && this.permissionsLevel >= 0))
 			DEFAULT = this;

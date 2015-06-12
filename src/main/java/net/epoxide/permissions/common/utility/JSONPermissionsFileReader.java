@@ -2,6 +2,7 @@ package net.epoxide.permissions.common.utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class JSONPermissionsFileReader extends AbstractPermissionsFileReader
 		String jsonFileStr = null;
 		try 
 		{
-			jsonFileStr = FileUtilities.readFileAsString(this.file);
+			jsonFileStr = readFileAsString(this.file);
 		} 
 		catch (IOException e) 
 		{
@@ -46,10 +47,10 @@ public class JSONPermissionsFileReader extends AbstractPermissionsFileReader
 	@Override
 	public void buildRanksFromFile() 
 	{
-		Map<String, Map<String, List<String>>> rankMap = (Map<String, Map<String, List<String>>>) jsonFile.get("ranks");
+		Map<String, Map<String, ArrayList<String>>> rankMap = (Map<String, Map<String, ArrayList<String>>>) jsonFile.get("ranks");
 		for(String rankTitle : rankMap.keySet())
 		{
-			Map<String, List<String>> rankData = rankMap.get(rankTitle);
+			Map<String, ArrayList<String>> rankData = rankMap.get(rankTitle);
 			int permLevel = Integer.parseInt(rankData.get("perm-level").get(0));
 			Rank rank = new Rank(rankTitle, permLevel);
 			this.rankPermissions.put(rank, rankData.get("permissions"));
@@ -75,10 +76,10 @@ public class JSONPermissionsFileReader extends AbstractPermissionsFileReader
 	@Override
 	public void buildPlayerSpecificPerms() 
 	{
-		Map<String, List<String>> playerData = (Map<String, List<String>>) this.jsonFile.get("players");
+		Map<String, ArrayList<String>> playerData = (Map<String, ArrayList<String>>) this.jsonFile.get("players");
 		for(String playerName : playerData.keySet())
 		{
-			List<String> playerPerms = playerData.get(playerName);
+			ArrayList<String> playerPerms = playerData.get(playerName);
 			this.playerSpecificPermissions.put(playerName, playerPerms);
 		}
 	}
