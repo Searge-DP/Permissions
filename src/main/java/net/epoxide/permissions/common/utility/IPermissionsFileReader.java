@@ -14,5 +14,5 @@ public interface IPermissionsFileReader
 	/**
 	 * Retrieve Player-Specific Permissions from the permissions file.
 	 **/
-	public void getPlayerSpecificPerms();
+	public void buildPlayerSpecificPerms();
 }

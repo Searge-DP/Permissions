@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class FileUtilities 
 {
-
 	public static String readFileAsString(File file) throws IOException 
 	{
 		BufferedReader bf = new BufferedReader(new FileReader(file));
@@ -21,5 +20,4 @@ public class FileUtilities
 		bf.close();
 		return strBuf.toString();
 	}
-
 }

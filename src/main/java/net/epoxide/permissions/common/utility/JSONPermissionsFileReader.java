@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import net.epoxide.permissions.common.api.Rank;
 import net.epoxide.permissions.common.ref.Constants;
 
 import com.google.common.base.Throwables;
@@ -54,7 +55,6 @@ public class JSONPermissionsFileReader extends AbstractPermissionsFileReader
 			this.rankPermissions.put(rank, rankData.get("permissions"));
 		}
 		
-		
 		for(Rank rank : this.rankPermissions.keySet())
 		{
 			for(Rank otherRank : this.rankPermissions.keySet())
@@ -73,7 +73,7 @@ public class JSONPermissionsFileReader extends AbstractPermissionsFileReader
 	}
 	
 	@Override
-	public void getPlayerSpecificPerms() 
+	public void buildPlayerSpecificPerms() 
 	{
 		Map<String, List<String>> playerData = (Map<String, List<String>>) this.jsonFile.get("players");
 		for(String playerName : playerData.keySet())

@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.epoxide.permissions.common.api.Rank;
+
 import com.google.common.collect.ImmutableMap;
 
 public abstract class AbstractPermissionsFileReader implements IPermissionsFileReader
 {
-	public final File file;
-	public final Map<Rank, List<String>> rankPermissions = new HashMap<Rank, List<String>>();
-	public final Map<String, List<String>> playerSpecificPermissions = new HashMap<String, List<String>>();
+	protected final File file;
+	protected final Map<Rank, List<String>> rankPermissions = new HashMap<Rank, List<String>>();
+	protected final Map<String, List<String>> playerSpecificPermissions = new HashMap<String, List<String>>();
 	
 	public AbstractPermissionsFileReader(File file)
 	{
