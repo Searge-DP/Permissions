@@ -32,8 +32,7 @@ public class PermissionsManager
 		}
 		
 		Map<ICommand, String> cmdPermMap = buildCommandMap();
-		fileReader.buildRanksFromFile();
-		fileReader.buildPlayerSpecificPerms();
+		fileReader.readFromFile();
 		PermissionsRegistry.instance().populate(ImmutableMap.copyOf(cmdPermMap), fileReader);
 	}
 

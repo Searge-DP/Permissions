@@ -1,7 +1,7 @@
 package net.epoxide.permissions.common.api;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import net.epoxide.permissions.common.utility.AbstractPermissionsFileReader;
 import net.minecraft.command.ICommand;
@@ -22,8 +22,8 @@ public class PermissionsRegistry
 	
 	private boolean isAvailable = false;
 	private ImmutableMap<ICommand, String> commandPerms;
-	private ImmutableMap<Rank, ArrayList<String>> rankPermissions;
-	private ImmutableMap<String, ArrayList<String>> playerSpecificPermissions;
+	private ImmutableMap<Rank, List<String>> rankPermissions;
+	private ImmutableMap<String, List<String>> playerSpecificPermissions;
 	
 	/**
 	 * Determines whether the player has the specified permission.
@@ -92,7 +92,7 @@ public class PermissionsRegistry
 	
 	public void setDefaultValues()
 	{
-		rankPermissions = ImmutableMap.of(new Rank("Admin", -1), new ArrayList<String>());
+		rankPermissions = ImmutableMap.of(new Rank("Admin", -1), (List<String>)new ArrayList<String>());
 	}
 	
 	public boolean isAvailable()

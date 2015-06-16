@@ -9,10 +9,5 @@ public interface IPermissionsFileReader
 	/**
 	 * Read the supplied permissions file and establish ranks based upon these.
 	 **/
-	public void buildRanksFromFile();
-	
-	/**
-	 * Retrieve Player-Specific Permissions from the permissions file.
-	 **/
-	public void buildPlayerSpecificPerms();
+	public void readFromFile();
 }

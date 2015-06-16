@@ -2,17 +2,18 @@ package net.epoxide.permissions.common;
 
 import java.lang.reflect.Field;
 
-import com.google.common.base.Throwables;
-
 import net.epoxide.permissions.common.api.PermissionsRegistry;
 import net.epoxide.permissions.common.ref.Constants;
+
+import com.google.common.base.Throwables;
+
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class IMCHandler 
 {
-	@SubscribeEvent
+	@EventHandler
 	public void handleIMCMessage(FMLInterModComms.IMCEvent event)
 	{
 		for(final IMCMessage message : event.getMessages())
@@ -53,7 +54,7 @@ public class IMCHandler
 					} 
 					catch (IllegalAccessException e) 
 					{
-						Constants.LOGGER.error(String.format("The Mod %s supplied an invalid field location %s. This field does not exist. Please report this to the mod creator.", message.getSender(), message.getStringValue()));
+						Constants.LOGGER.error("The Permissions Mod has encountered an error. Please report this to the mod creator.");
 						Throwables.propagate(e);
 					}
 				}
